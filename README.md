@@ -1,68 +1,70 @@
-# Cross-Platform Security Monitoring & Visibility Lab (Wazuh SIEM/XDR)
+# Cross-Platform Security Monitoring Lab (Wazuh SIEM)
 
 ## 📌 Overview
-This lab demonstrates the deployment and configuration of a centralized security monitoring solution using **Wazuh (SIEM/XDR)**. The project focuses on establishing comprehensive visibility across a hybrid environment consisting of **Windows 10** and **Ubuntu Linux** endpoints. By integrating these systems, I created a unified telemetry pipeline capable of real-time threat detection, file integrity monitoring, and vulnerability assessment.
+This project highlights the deployment of an enterprise-grade **SIEM/XDR** solution using **Wazuh**[cite: 1]. The primary objective was to architect a "Single Pane of Glass" for centralized security monitoring across a hybrid lab environment[cite: 1]. I successfully integrated **Windows 10** and **Ubuntu Linux** endpoints with a **Wazuh OVA Manager**, establishing a robust pipeline for real-time telemetry and log ingestion[cite: 1].
 
 ---
 
 ## 🛠️ Technical Stack
-*   **SIEM/XDR Manager:** Wazuh 4.x (OVA Deployment)
-*   **Endpoints:** Windows 10 Enterprise, Ubuntu 22.04 LTS
+*   **SIEM Manager:** Wazuh 4.x (OVA Deployment)
+*   **Endpoints:** Windows 10 (Workstation) | Ubuntu 22.04 
 *   **Virtualization:** Oracle VirtualBox
-*   **Automation/Scripting:** PowerShell, Bash
-*   **Network:** Bridged Adapter configuration for cross-host communication
+*   **Administration:** PowerShell (Windows) | Bash/CLI (Linux)
+*   **Networking:** Bridged Adapter configuration for cross-segment communication
 
 ---
 
-## 🏗️ Architecture
-The environment was architected to simulate a small enterprise network:
-1.  **Wazuh Manager:** Serves as the central brain for log collection, analysis, and alerting.
-2.  **Windows Agent:** Monitored via a PowerShell-provisioned agent to capture Event Logs, Sysmon data, and registry changes.
-3.  **Ubuntu Agent:** Monitored via a CLI-provisioned agent to track authentication logs (`auth.log`), system changes, and rootkit activity.
+## 🏗️ Lab Architecture
+The environment was engineered to simulate a centralized Security Operations Center (SOC) monitoring diverse enterprise assets[cite: 1]:
+1.  **Wazuh Manager:** Centralized engine responsible for log analysis, alert correlation, and visualization[cite: 1].
+2.  **Windows Agent:** Installed on Windows 10 to monitor Event Logs, system integrity, and user activity[cite: 1].
+3.  **Ubuntu Agent:** Installed on Linux to monitor authentication logs and system service status[cite: 1].
 
 ---
 
-## 🚀 Implementation Highlights
+## 🚀 Implementation Steps
 
-### 1. Endpoint Provisioning
-To ensure a secure and efficient rollout, agents were deployed using platform-specific automation:
+### 1. SIEM Infrastructure Deployment
+*   Provisioned the **Wazuh OVA** within VirtualBox, ensuring network interfaces were configured for bi-directional communication.
+*   Validated the initialization of the Wazuh Indexer and Server components.
+*   Verified accessibility of the web dashboard for centralized management.
 
-*   **Windows 10:** Utilized an elevated **PowerShell** script to download the MSI package, assign the manager IP, and initiate the registration service.
-*   **Ubuntu:** Deployed via **Bash** using the official Wazuh repository, ensuring the agent was correctly linked to the manager's registration server.
-
-### 2. Log Analysis & Threat Detection
-Configured the manager to ingest and parse logs for specific security events, including:
-*   Failed authentication attempts (Brute-force detection).
-*   Account creations and privilege escalations.
-*   System service modifications.
-
-### 3. File Integrity Monitoring (FIM)
-I tuned the `ossec.conf` file on both endpoints to monitor sensitive directories:
-*   **Windows:** Monitored `C:\Windows\System32\drivers\etc\hosts` for unauthorized redirection attempts.
-*   **Linux:** Monitored `/etc/shadow` and `/etc/passwd` to detect unauthorized user modifications.
-
-### 4. Vulnerability Management & Compliance
-Enabled the **Security Configuration Assessment (SCA)** module to:
-*   Identify unpatched software and high-severity CVEs.
-*   Audit systems against CIS (Center for Internet Security) benchmarks.
-*   Map findings to the **MITRE ATT&CK** framework for better context during incident response.
+<img width="1027" height="762" alt="Wazuh Manager Initialization" src="https://github.com/user-attachments/assets/17eb9861-4f85-45e1-b577-0f56b30b13c4" />
 
 ---
 
-## 📊 Key Results
-*   **Unified Visibility:** Successfully consolidated disparate logs from Linux and Windows into a single "Pane of Glass."
-*   **Active Alerting:** Validated that the manager triggers high-severity alerts within seconds of a detected threat (e.g., unauthorized file change).
-*   **Hardening Baseline:** Used SCA reports to identify and remediate three critical misconfigurations on the Ubuntu server.
+### 2. Manual Agent Provisioning (Windows)
+*   Utilized an elevated **PowerShell** session to deploy the Wazuh agent MSI.
+*   Manually defined the Manager's IP address and registration parameters to ensure secure enrollment.
+*   Verified the `Wazuh` service status to confirm the successful handshake with the manager.
+
+<img width="1027" height="762" alt="Windows Agent Registration" src="https://github.com/user-attachments/assets/64dfe16b-5a79-47ba-ae26-fb14df073e58" />
+<img width="908" height="274" alt="PowerShell Verification" src="https://github.com/user-attachments/assets/f101d753-f122-49d8-8313-3fee56190f7a" />
 
 ---
 
-## 📂 Repository Structure
-*   `/configs`: Contains snippets of customized `ossec.conf` settings.
-*   `/scripts`: Includes the PowerShell and Bash commands used for agent deployment.
-*   `/docs`: Screenshots of the Wazuh Dashboard and sample alerts.
+### 3. Manual Agent Provisioning (Ubuntu)
+*   Integrated the official Wazuh repository via the **Linux Terminal**.
+*   Configured the `ossec.conf` communication settings to link the endpoint with the manager.
+*   Initialized the `wazuh-agent` service and monitored local logs to confirm successful registration.
+
+<img width="1021" height="765" alt="Ubuntu Agent CLI Installation" src="https://github.com/user-attachments/assets/9ed05d6e-89d4-406c-ba81-4592a5935dad" />
 
 ---
 
-## 🔗 Connect with Me
-**Gary Collins**  
-[LinkedIn](https://linkedin.com/in/garyjosephcollins) | IT Support & Security Specialist
+### 4. Visibility & Telemetry Validation
+*   Performed an audit of the **Agents Dashboard** to verify "Active" status across all platforms.
+*   Validated system telemetry, including OS metadata, network interfaces, and package inventory.
+*   Confirmed real-time log flow by monitoring security events ingested from both Windows and Linux environments.
+
+<img width="1011" height="716" alt="Final Dashboard Connectivity Overview" src="https://github.com/user-attachments/assets/06e3c07b-5f62-42f8-98b4-1ed9aabeb12f" />
+
+---
+
+## 📊 Key Takeaways
+*   **Cross-Platform Competency:** Gained hands-on experience in managing security telemetry for both Windows and Linux environments using native administration tools.
+*   **SIEM Engineering:** Developed a practical understanding of the Manager-Agent communication model and the log collection lifecycle.
+*   **Network Hardening:** Configured and validated virtual network adapters to ensure a stable and secure telemetry pipeline.
+
+---
+
