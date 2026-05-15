@@ -15,10 +15,10 @@ This project highlights the deployment of an enterprise-grade **SIEM/XDR** solut
 ---
 
 ## 🏗️ Lab Architecture
-The environment was engineered to simulate a centralized Security Operations Center (SOC) monitoring diverse enterprise assets[cite: 1]:
-1.  **Wazuh Manager:** Centralized engine responsible for log analysis, alert correlation, and visualization[cite: 1].
-2.  **Windows Agent:** Installed on Windows 10 to monitor Event Logs, system integrity, and user activity[cite: 1].
-3.  **Ubuntu Agent:** Installed on Linux to monitor authentication logs and system service status[cite: 1].
+The environment was engineered to simulate a centralized Security Operations Center (SOC) monitoring diverse enterprise assets:
+1.  **Wazuh Manager:** Centralized engine responsible for log analysis, alert correlation, and visualization.
+2.  **Windows Agent:** Installed on Windows 10 to monitor Event Logs, system integrity, and user activity.
+3.  **Ubuntu Agent:** Installed on Linux to monitor authentication logs and system service status.
 
 ---
 
