@@ -1,4 +1,4 @@
-# Cross-Platform Security Monitoring Lab (Wazuh SIEM)
+# Cross-Platform Security Monitoring Lab (Wazuh SIEM/XDR)
 
 ## 📌 Overview
 This project highlights the deployment of an enterprise-grade **SIEM/XDR** solution using **Wazuh**[cite: 1]. The primary objective was to architect a "Single Pane of Glass" for centralized security monitoring across a hybrid lab environment[cite: 1]. I successfully integrated **Windows 10** and **Ubuntu Linux** endpoints with a **Wazuh OVA Manager**, establishing a robust pipeline for real-time telemetry and log ingestion[cite: 1].
@@ -68,3 +68,9 @@ The environment was engineered to simulate a centralized Security Operations Cen
 
 ---
 
+<hr>
+
+<h2>🔗 Project Links</h2>
+<p>
+  <a href="https://github.com/GaryCollinsAI-Sec">Main Portfolio</a>
+</p>
